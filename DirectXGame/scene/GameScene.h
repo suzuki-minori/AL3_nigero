@@ -8,6 +8,8 @@
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include"Player.h"
+#include <vector>
+#include"DebugCamera.h"
 
 
 class Skydome;
@@ -49,7 +51,8 @@ private: // メンバ変数
 	Audio* audio_ = nullptr;
 	uint32_t textureHandle_ = 0;
 	Model* model_ = nullptr;
-
+	Model* modelBlock_ = nullptr;
+	WorldTransform worldTransform_;
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
@@ -57,5 +60,8 @@ private: // メンバ変数
 	Skydome* skydome_;
 	Model* skydomeModel_;
 	ViewProjection viewProjection_;
+	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
+	bool isDebugcameraActive_ = false;
+	DebugCamera* debugCamera_ = nullptr;
 	Player* player_ = nullptr;
 };
