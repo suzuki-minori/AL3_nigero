@@ -7,6 +7,8 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 	delete skydome_;
+	delete model_;
+	delete player_;
 }
 
 void GameScene::Initialize() {
@@ -15,7 +17,12 @@ void GameScene::Initialize() {
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
 
+	textureHandle_ = TextureManager::Load("mario.png");
+	model_ = Model::Create();
 	viewProjection_.Initialize();
+
+	player_ = new Player();
+	player_->Initialize(model_, textureHandle_, &viewProjection_);
 
 	skydomeModel_ = Model::Create();
 	skydome_ = new Skydome();
@@ -24,6 +31,7 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 	skydome_->Update();
+	player_->Update();
 }
 
 void GameScene::Draw() {
@@ -52,7 +60,7 @@ void GameScene::Draw() {
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
-
+	player_->Draw();
 	skydome_->Draw();
 
 	// 3Dオブジェクト描画後処理
