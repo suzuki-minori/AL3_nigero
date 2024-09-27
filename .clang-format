@@ -6,7 +6,7 @@ AlignConsecutiveMacros: AcrossComments
 AlignTrailingComments: true
 AllowShortFunctionsOnASingleLine: All
 BreakBeforeBraces: Attach
-ColumnLimit: 100
+ColumnLimit: 200
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 EmptyLineAfterAccessModifier: Never
@@ -25,6 +25,5 @@ Standard: Latest
 TabWidth: 4
 UseCRLF: false
 UseTab: ForIndentation
-BreakBeforeBraces: Custom
 BraceWrapping:
-  IndentBraces: false
+	IndentBraces: false
