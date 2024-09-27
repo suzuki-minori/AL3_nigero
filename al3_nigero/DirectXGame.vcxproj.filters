@@ -61,8 +61,8 @@
     <Filter Include="ヘッダー ファイル\Resources\block">
       <UniqueIdentifier>{17ee7927-a003-4015-95c3-33b2f227a2b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Resources\anko">
-      <UniqueIdentifier>{0289094a-eebe-4748-840d-d96398281c1c}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\Resources\maru">
+      <UniqueIdentifier>{de073cec-77d5-470f-8f9d-3d78fcc1dffd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -303,5 +303,36 @@
     <None Include="Resources\shaders\Terrain.hlsli">
       <Filter>シェーダー ファイル</Filter>
     </None>
+    <None Include="Resources\block\block.mtl">
+      <Filter>ヘッダー ファイル\Resources\block</Filter>
+    </None>
+    <None Include="Resources\maru\maru.mtl">
+      <Filter>ヘッダー ファイル\Resources\maru</Filter>
+    </None>
+    <None Include="Resources\axis\axis.mtl">
+      <Filter>ヘッダー ファイル\Resources\axis</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Resources\block\block.obj">
+      <Filter>ヘッダー ファイル\Resources\block</Filter>
+    </Object>
+    <Object Include="Resources\maru\maru.obj">
+      <Filter>ヘッダー ファイル\Resources\maru</Filter>
+    </Object>
+    <Object Include="Resources\axis\axis.obj">
+      <Filter>ヘッダー ファイル\Resources\axis</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\block\block.png">
+      <Filter>ヘッダー ファイル\Resources\block</Filter>
+    </Image>
+    <Image Include="Resources\maru\maru.png">
+      <Filter>ヘッダー ファイル\Resources\maru</Filter>
+    </Image>
+    <Image Include="Resources\axis\axis.jpg">
+      <Filter>ヘッダー ファイル\Resources\axis</Filter>
+    </Image>
   </ItemGroup>
 </Project>

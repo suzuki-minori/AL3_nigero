@@ -10,36 +10,36 @@
 class ClearParticle {
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position);
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Draw();
-	// ƒfƒXƒOƒ‰ƒO‚Ìgetter
+	// ãƒ‡ã‚¹ã‚°ãƒ©ã‚°ã®getter
 	bool IsFinished() const { return finished_; }
 
 private:
-	// ƒ‚ƒfƒ‹
+	// ãƒ¢ãƒ‡ãƒ«
 	Model* model_ = nullptr;
-	// ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“
+	// ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³
 	ViewProjection* viewProjection_ = nullptr;
-	// ƒp[ƒeƒBƒNƒ‹‚ÌŒÂ”
+	// ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®å€‹æ•°
 	static inline const uint32_t kNumParticles = 8;
 	std::array<WorldTransform, kNumParticles> worldTransforms_;
-	// ‘¶‘±ŠÔ
+	// å­˜ç¶šæ™‚é–“
 	static inline const float kDuration = 2.0f;
-	// ˆÚ“®‚Ì‘¬‚³
+	// ç§»å‹•ã®é€Ÿã•
 	static inline const float kSpeed = 0.05f;
-	// •ªŠ„‚µ‚½1ŒÂ•ª‚ÌŠp“x
+	// åˆ†å‰²ã—ãŸ1å€‹åˆ†ã®è§’åº¦
 	static inline const float kAngleUnit = (2 * std::numbers::pi_v<float> / kNumParticles);
-	// I—¹ƒtƒ‰ƒO
+	// çµ‚äº†ãƒ•ãƒ©ã‚°
 	bool finished_ = false;
-	// Œo‰ßŠÔƒJƒEƒ“ƒg
+	// çµŒéæ™‚é–“ã‚«ã‚¦ãƒ³ãƒˆ
 	float counter_ = 0.0f;
-	// F•ÏXƒIƒuƒWƒFƒNƒg
+	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	ObjectColor objectColor_;
-	// F‚Ì•ÏX
+	// è‰²ã®å¤‰æ›´
 	Vector4 color_;
 
 };

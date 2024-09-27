@@ -9,44 +9,44 @@ void ClearParticle::Initialize(Model* model, ViewProjection* viewProjection, con
 	objectColor_.Initialize();
 	color_ = { 1, 0, 0, 0 };
 }
-// XV
+// æ›´æ–°
 void ClearParticle::Update() {
-	// I—¹‚È‚ç‚È‚ñ‚à‚µ‚È‚¢
+	// çµ‚äº†ãªã‚‰ãªã‚“ã‚‚ã—ãªã„
 	if (finished_) {
 		return;
 	}
 	for (uint32_t i = 0; i < kNumParticles; ++i) {
-		// Šî–{‚Æ‚È‚é‘¬“xƒxƒNƒgƒ‹
+		// åŸºæœ¬ã¨ãªã‚‹é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«
 		Vector3 velocity = { kSpeed, 0, 0 };
-		// ‰ñ“]Šp‚ğŒvZ‚·‚é
+		// å›è»¢è§’ã‚’è¨ˆç®—ã™ã‚‹
 		float angle = kAngleUnit * i;
-		// Z²‰ñ‚è‰ñ“]s—ñ
+		// Zè»¸å›ã‚Šå›è»¢è¡Œåˆ—
 		Matrix4x4 matrixRotation = MakeRotateZMatrix(angle);
-		// Šî–{ƒxƒNƒgƒ‹‚ğ‰ñ“]‚³‚¹‚Ä‘¬“xƒxƒNƒgƒ‹‚ğ“¾‚é
+		// åŸºæœ¬ãƒ™ã‚¯ãƒˆãƒ«ã‚’å›è»¢ã•ã›ã¦é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
 		velocity = Transform(velocity, matrixRotation);
-		// ˆÚ“®ˆ—
+		// ç§»å‹•å‡¦ç†
 		worldTransforms_[i].translation_ += velocity;
 	}
-	// ƒJƒEƒ“ƒ^[‚ğ1ƒtƒŒ[ƒ€•ª‚Ì•b”i‚ß‚é
+	// ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’1ãƒ•ãƒ¬ãƒ¼ãƒ åˆ†ã®ç§’æ•°é€²ã‚ã‚‹
 	counter_ += 1.0f / 60.0f;
-	// ‘¶‘±ŠÔ‚ÌãŒÀ‚É’B‚µ‚½‚ç
+	// å­˜ç¶šæ™‚é–“ã®ä¸Šé™ã«é”ã—ãŸã‚‰
 	if (counter_ >= kDuration) {
 		counter_ = kDuration;
-		// I—¹ˆµ‚¢‚É‚·‚é
+		// çµ‚äº†æ‰±ã„ã«ã™ã‚‹
 		finished_ = true;
 	}
 	for (auto& worldTransform : worldTransforms_) {
 		worldTransform.UpdateMatirx();
 	}
 	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
-	// F•ÏXƒIƒuƒWƒFƒNƒg‚ÉF‚Ì”’l‚ğİ’è‚·‚é
+	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è‰²ã®æ•°å€¤ã‚’è¨­å®šã™ã‚‹
 	objectColor_.SetColor(color_);
-	// F•ÏXƒIƒuƒWƒFƒNƒg‚ğVRAM‚É“]‘—
+	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’VRAMã«è»¢é€
 	objectColor_.TransferMatrix();
 }
-// •`‰æ
+// æç”»
 void ClearParticle::Draw() {
-	// I—¹‚È‚ç‚È‚ñ‚à‚µ‚È‚¢
+	// çµ‚äº†ãªã‚‰ãªã‚“ã‚‚ã—ãªã„
 	if (finished_) {
 		return;
 	}

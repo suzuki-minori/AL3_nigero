@@ -3,8 +3,8 @@
 #include <string>
 
 /// <summary>
-/// ƒ}ƒ‹ƒ`ƒoƒCƒg•¶Žš—ñ‚ðƒƒCƒh•¶Žš—ñ‚É•ÏŠ·‚·‚é
+/// ãƒžãƒ«ãƒãƒã‚¤ãƒˆæ–‡å­—åˆ—ã‚’ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—ã«å¤‰æ›ã™ã‚‹
 /// </summary>
-/// <param name="str">ƒ}ƒ‹ƒ`ƒoƒCƒg•¶Žš—ñ</param>
-/// <returns>ƒƒCƒh•¶Žš—ñ</returns>
+/// <param name="str">ãƒžãƒ«ãƒãƒã‚¤ãƒˆæ–‡å­—åˆ—</param>
+/// <returns>ãƒ¯ã‚¤ãƒ‰æ–‡å­—åˆ—</returns>
 std::wstring ConvertStringMultiByteToWide(const std::string& str);

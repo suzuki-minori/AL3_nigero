@@ -180,6 +180,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <None Include="Resources\axis\axis.mtl" />
+    <None Include="Resources\block\block.mtl" />
+    <None Include="Resources\maru\maru.mtl" />
     <None Include="Resources\shaders\Obj.hlsli" />
     <None Include="Resources\shaders\Primitive.hlsli" />
     <None Include="Resources\shaders\Shape.hlsli">
@@ -225,6 +228,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Sprite.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Resources\axis\axis.obj" />
+    <Object Include="Resources\block\block.obj" />
+    <Object Include="Resources\maru\maru.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\axis\axis.jpg" />
+    <Image Include="Resources\block\block.png" />
+    <Image Include="Resources\maru\maru.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

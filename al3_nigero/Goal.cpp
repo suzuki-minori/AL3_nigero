@@ -12,7 +12,7 @@ void Goal::Initialize(Model* model, ViewProjection* viewProjection, const Vector
 
 void Goal::Update() {
 
-	// s—ñŒvŽZ
+	// è¡Œåˆ—è¨ˆç®—
 	worldTransform_.UpdateMatirx();
 }
 Vector3 Goal::GetWorldPosition() {
@@ -35,12 +35,12 @@ AABB Goal::GetAABB() {
 void Goal::OnCollision(const Player* Player) {
 	(void)Player;
 
-	// ƒfƒXƒtƒ‰ƒO‚ð—§‚Ä‚é
+	// ãƒ‡ã‚¹ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 	isFinished_ = true;
 }
 
 
 void Goal::Draw() {
-	// 3Dƒ‚ƒfƒ‹‚ð•`‰æ
+	// 3Dãƒ¢ãƒ‡ãƒ«ã‚’æç”»
 	model_->Draw(worldTransform_, *viewProjection_);
 };

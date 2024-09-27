@@ -15,35 +15,35 @@ class Player;
 
 class Goal {
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position);
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Draw();
-	// ƒ[ƒ‹ƒhÀ•W‚ğæ“¾
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—
 	Vector3 GetWorldPosition();
-	// Õ“Ë‰“š
+	// è¡çªå¿œç­”
 	void OnCollision(const Player* player);
 
-	// AABB‚ğæ“¾
+	// AABBã‚’å–å¾—
 	AABB GetAABB();
 	bool IsDead() const { return isFinished_; }
 
 private:
-	// ƒ[ƒ‹ƒh•ÏŠ·ƒf[ƒ^
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ãƒ‡ãƒ¼ã‚¿
 	WorldTransform worldTransform_;
-	// ƒ‚ƒfƒ‹
+	// ãƒ¢ãƒ‡ãƒ«
 	Model* model_ = nullptr;
-	// ƒeƒNƒXƒ`ƒƒƒnƒ“ƒhƒ‹
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒ³ãƒ‰ãƒ«
 	// uint32_t textureHandle_ = 0u;
-	// ƒ}ƒbƒvƒ`ƒbƒv
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—
 	MapChipField* mapChipField_ = nullptr;
-	// ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“
+	// ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³
 	ViewProjection* viewProjection_ = nullptr;
-	// ƒLƒƒƒ‰ƒNƒ^[‚Ì“–‚½‚è”»’èƒTƒCƒY
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã‚µã‚¤ã‚º
 	static inline const float kWidth = 0.8f;
 	static inline const float kHeight = 0.8f;
-	// ƒfƒXƒtƒ‰ƒO
+	// ãƒ‡ã‚¹ãƒ•ãƒ©ã‚°
 	bool isFinished_ = false;
 };
