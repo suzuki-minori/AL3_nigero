@@ -45,8 +45,8 @@ public: // メンバ関数
 	/// <param name="clientHeight">ウィンドウのクライアント領域の初期高さ</param>
 	/// </summary>
 	void CreateGameWindow(
-	    const wchar_t* title = L"DirectXGame", UINT windowStyle = WS_OVERLAPPEDWINDOW,
-	    int32_t clientWidth = kWindowWidth, int32_t clientHeight = kWindowHeight);
+		const wchar_t* title = L"DirectXGame", UINT windowStyle = WS_OVERLAPPEDWINDOW,
+		int32_t clientWidth = kWindowWidth, int32_t clientHeight = kWindowHeight);
 
 	/// <summary>
 	/// ゲームウィンドウの破棄

@@ -163,7 +163,7 @@ public: // メンバ関数
 
 private:
 	static BOOL CALLBACK
-	    EnumJoysticksCallback(const DIDEVICEINSTANCE* pdidInstance, VOID* pContext) noexcept;
+		EnumJoysticksCallback(const DIDEVICEINSTANCE* pdidInstance, VOID* pContext) noexcept;
 	Input() = default;
 	~Input();
 	Input(const Input&) = delete;

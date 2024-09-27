@@ -1,6 +1,5 @@
-ï»¿#include "DeathParticles.h"
-
-void DeathParticles::Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position) {
+#include "ClearParticle.h"
+void ClearParticle::Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position) {
 	model_ = model;
 	viewProjection_ = viewProjection;
 	for (auto& worldTransform : worldTransforms_) {
@@ -8,46 +7,46 @@ void DeathParticles::Initialize(Model* model, ViewProjection* viewProjection, co
 		worldTransform.translation_ = position;
 	}
 	objectColor_.Initialize();
-	color_ = { 1, 1, 1, 1 };
+	color_ = { 1, 0, 0, 0 };
 }
-// æ›´æ–°
-void DeathParticles::Update() {
-	//çµ‚äº†ãªã‚‰ãªã‚“ã‚‚ã—ãªã„
+// XV
+void ClearParticle::Update() {
+	// I—¹‚È‚ç‚È‚ñ‚à‚µ‚È‚¢
 	if (finished_) {
 		return;
 	}
 	for (uint32_t i = 0; i < kNumParticles; ++i) {
-		//åŸºæœ¬ã¨ãªã‚‹é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«
+		// Šî–{‚Æ‚È‚é‘¬“xƒxƒNƒgƒ‹
 		Vector3 velocity = { kSpeed, 0, 0 };
-		//å›è»¢è§’ã‚’è¨ˆç®—ã™ã‚‹
+		// ‰ñ“]Šp‚ğŒvZ‚·‚é
 		float angle = kAngleUnit * i;
-		//Zè»¸å›ã‚Šå›è»¢è¡Œåˆ—
+		// Z²‰ñ‚è‰ñ“]s—ñ
 		Matrix4x4 matrixRotation = MakeRotateZMatrix(angle);
-		//åŸºæœ¬ãƒ™ã‚¯ãƒˆãƒ«ã‚’å›è»¢ã•ã›ã¦é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«ã‚’å¾—ã‚‹
+		// Šî–{ƒxƒNƒgƒ‹‚ğ‰ñ“]‚³‚¹‚Ä‘¬“xƒxƒNƒgƒ‹‚ğ“¾‚é
 		velocity = Transform(velocity, matrixRotation);
-		//ç§»å‹•å‡¦ç†
+		// ˆÚ“®ˆ—
 		worldTransforms_[i].translation_ += velocity;
 	}
-	// ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’1ãƒ•ãƒ¬ãƒ¼ãƒ åˆ†ã®ç§’æ•°é€²ã‚ã‚‹
+	// ƒJƒEƒ“ƒ^[‚ğ1ƒtƒŒ[ƒ€•ª‚Ì•b”i‚ß‚é
 	counter_ += 1.0f / 60.0f;
-	// å­˜ç¶šæ™‚é–“ã®ä¸Šé™ã«é”ã—ãŸã‚‰
+	// ‘¶‘±ŠÔ‚ÌãŒÀ‚É’B‚µ‚½‚ç
 	if (counter_ >= kDuration) {
 		counter_ = kDuration;
-		// çµ‚äº†æ‰±ã„ã«ã™ã‚‹
+		// I—¹ˆµ‚¢‚É‚·‚é
 		finished_ = true;
 	}
 	for (auto& worldTransform : worldTransforms_) {
 		worldTransform.UpdateMatirx();
 	}
 	color_.w = std::clamp(1.0f - counter_ / kDuration, 0.0f, 1.0f);
-	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è‰²ã®æ•°å€¤ã‚’è¨­å®šã™ã‚‹
+	// F•ÏXƒIƒuƒWƒFƒNƒg‚ÉF‚Ì”’l‚ğİ’è‚·‚é
 	objectColor_.SetColor(color_);
-	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’VRAMã«è»¢é€
+	// F•ÏXƒIƒuƒWƒFƒNƒg‚ğVRAM‚É“]‘—
 	objectColor_.TransferMatrix();
 }
-// æç”»
-void DeathParticles::Draw() {
-	// çµ‚äº†ãªã‚‰ãªã‚“ã‚‚ã—ãªã„
+// •`‰æ
+void ClearParticle::Draw() {
+	// I—¹‚È‚ç‚È‚ñ‚à‚µ‚È‚¢
 	if (finished_) {
 		return;
 	}

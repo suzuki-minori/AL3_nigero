@@ -4,14 +4,8 @@
 #include "WorldTransform.h"
 #include "DirectXCommon.h"
 #include "Input.h"
-/// <summary>
-/// 
-/// </summary>
-class TitleScene {
+class Title {
 public:
-	TitleScene();
-
-	~TitleScene();
 
 
 	void Initialize();
@@ -20,19 +14,19 @@ public:
 
 	void Draw();
 
-	//デスグラグのgetter
+	// デスグラグのgetter
 	bool IsFinished() const { return finished_; }
 
 private:
-	//最初の角度[度]
+	// 最初の角度[度]
 	static inline const float kWalkMotionAngleStart = 5.0f;
 	// 最後の角度[度]
 	static inline const float kWalkMotionAngleEnd = -5.0f;
 	// アニメーションの周期となる時間[秒]
 	static inline const float kWalklMotionTime = 1.0f;
-	//タイマー
+	// タイマー
 	float Timer_ = 0.0f;
-	//終了フラグ
+	// 終了フラグ
 	bool finished_ = false;
 	DirectXCommon* dxCommon_ = nullptr;
 	WorldTransform titleWorldTransform_;

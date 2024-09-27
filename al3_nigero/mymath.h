@@ -1,61 +1,30 @@
 ﻿#pragma once
+#pragma once
 #include "Matrix4x4.h"
+#include "Vector2.h"
 #include "Vector3.h"
-#include <cmath>
-#include <assert.h>
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+#include <math.h>
+#define _USE_MATH_DEFINES
 
-//Vector3の足し算
-Vector3 operator+(const Vector3& v1, const Vector3& v2);
-Vector3& operator+=(Vector3& v1, const Vector3& v2);
-
-//Vector3の引き算
-Vector3 operator-(const Vector3& v1, const Vector3& v2);
-Vector3 operator-=(Vector3& v1, const Vector3& v2);
-
-//Vector3の掛け算(スカラー)
-Vector3 operator*(const Vector3& v, float s);
+// 単項演算子オーバーロード
+Vector3 operator+(const Vector3& v);
+Vector3 operator-(const Vector3& v);
+// 代入演算子オーバーロード
+Vector3& operator+=(Vector3& lhs, const Vector3& rhv);
+Vector3& operator-=(Vector3& lhs, const Vector3& rhv);
 Vector3& operator*=(Vector3& v, float s);
+Vector3& operator/=(Vector3& v, float s);
+// 2項演算子オーバーロード
+const Vector3 operator+(const Vector3& v1, const Vector3& v2);
+const Vector3 operator-(const Vector3& v1, const Vector3& v2);
+const Vector3 operator*(const Vector3& v, float s);
+const Vector3 operator*(float s, const Vector3& v);
+const Vector3 operator/(const Vector3& v, float s);
 
-//Vector3同士の掛け算
-Vector3 operator*(const Vector3& v1, const Vector3& v2);
-Vector3& operator*=(Vector3& v1, const Vector3& v2);
 
-//線形補間
-double easeInOutSine(double x);
-// 加算
-Vector3 Add(const Vector3& v1, const Vector3& v2);
-Vector3 Subtract(const Vector3& v1, const Vector3& v2);
-
-// スカラー倍
-Vector3 Multiply(float scalar, const Vector3& v);
-
-// 内積
-float Dot(const Vector3& v1, const Vector3& v2);
-
-// 長さの2乗
-float LengthSquared(const Vector3& v);
-
-// 長さ
-float Length(const Vector3& v);
-
+// 行列の掛け算
+Matrix4x4 MatrixMultiply(Matrix4x4& m1, Matrix4x4& m2);
+Matrix4x4 MakeRotateZMatrix(float& rot);
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
 
-// 正規化
-Vector3 Normalize(const Vector3& v);
-// 平行移動行列
-Matrix4x4 MakeTranslateMatrix(const Vector3& translate);
-// 拡大縮小行列
-Matrix4x4 MakeScaleMatrix(const Vector3& scale);
-// x軸回転行列
-Matrix4x4 MakeRotateXMatrix(float radian);
-// y軸回転行列
-Matrix4x4 MakeRotateYMatrix(float radian);
-// z軸回転行列
-Matrix4x4 MakeRotateZMatrix(float radian);
-
-Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2);
-//アフィン変換
-Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vector3& translate);

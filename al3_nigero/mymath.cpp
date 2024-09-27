@@ -1,91 +1,94 @@
-﻿#include "myMath.h"
+﻿#pragma once
+#include "Matrix4x4.h"
+#include "myMath.h"
+#include <math.h>
+#include<cmath>
+#include<assert.h>
+#define _USE_MATH_DEFINES
 
-// Vector3の足し算
-Vector3 operator+(const Vector3& v1, const Vector3& v2) {
-	Vector3 result{};
-	result.x = v1.x + v2.x;
-	result.y = v1.y + v2.y;
-	result.z = v1.z + v2.z;
-	return result;
+// 単項演算子オーバーロード
+Vector3
+operator+(const Vector3& v) {
+	return v;
 }
-
-Vector3& operator+=(Vector3& v1, const Vector3& v2) {
-	v1.x += v2.x;
-	v1.y += v2.x;
-	v1.z += v2.x;
-	return v1;
+Vector3 operator-(const Vector3& v) { return Vector3(-v.x, -v.y, -v.z); }
+Vector3& operator+=(Vector3& lhv, const Vector3& rhv) {
+	lhv.x += rhv.x;
+	lhv.y += rhv.y;
+	lhv.z += rhv.z;
+	return lhv;
 }
-
-// Vector3の引き算
-Vector3 operator-(const Vector3& v1, const Vector3& v2) {
-	Vector3 result{};
-	result.x = v1.x - v2.x;
-	result.y = v1.y - v2.y;
-	result.z = v1.z - v2.z;
-	return result;
+Vector3& operator-=(Vector3& lhv, const Vector3& rhv) {
+	lhv.x -= rhv.x;
+	lhv.y -= rhv.y;
+	lhv.z -= rhv.z;
+	return lhv;
 }
-
-Vector3 operator-=(Vector3& v1, const Vector3& v2) {
-	v1.x -= v2.x;
-	v1.y -= v2.x;
-	v1.z -= v2.x;
-	return v1;
-}
-
-// Vector3の掛け算(スカラー)
-Vector3 operator*(const Vector3& v, float s) {
-	Vector3 result{};
-	result.x = v.x * s;
-	result.y = v.y * s;
-	result.z = v.z * s;
-	return result;
-}
-
 Vector3& operator*=(Vector3& v, float s) {
 	v.x *= s;
 	v.y *= s;
 	v.z *= s;
 	return v;
 }
+Vector3& operator/=(Vector3& v, float s) {
+	v.x /= s;
+	v.y /= s;
+	v.z /= s;
+	return v;
+}
+// 2項演算子オーバーロード
+const Vector3 operator+(const Vector3& v1, const Vector3& v2) {
+	Vector3 temp(v1);
+	return temp += v2;
+}
+const Vector3 operator-(const Vector3& v1, const Vector3& v2) {
+	Vector3 temp(v1);
+	return temp -= v2;
+}
+const Vector3 operator*(const Vector3& v, float s) {
+	Vector3 temp(v);
+	return temp *= s;
+}
+const Vector3 operator*(float s, const Vector3& v) { return v * s; }
+const Vector3 operator/(const Vector3& v, float s) {
+	Vector3 temp(v);
+	return temp /= s;
+}
 
-//Vector3同士の掛け算
-Vector3 operator*(const Vector3& v1, const Vector3& v2)
-{
-	Vector3 result{};
-	result.x = v1.x * v2.x;
-	result.y = v1.y * v2.y;
-	result.z = v1.z * v2.z;
+
+// 行列の掛け算
+Matrix4x4 MatrixMultiply(Matrix4x4& m1, Matrix4x4& m2) {
+
+	Matrix4x4 result;
+	result.m[0][0] = m1.m[0][0] * m2.m[0][0] + m1.m[0][1] * m2.m[1][0] + m1.m[0][2] * m2.m[2][0] + m1.m[0][3] * m2.m[3][0];
+	result.m[0][1] = m1.m[0][0] * m2.m[0][1] + m1.m[0][1] * m2.m[1][1] + m1.m[0][2] * m2.m[2][1] + m1.m[0][3] * m2.m[3][1];
+	result.m[0][2] = m1.m[0][0] * m2.m[0][2] + m1.m[0][1] * m2.m[1][2] + m1.m[0][2] * m2.m[2][2] + m1.m[0][3] * m2.m[3][2];
+	result.m[0][3] = m1.m[0][0] * m2.m[0][3] + m1.m[0][1] * m2.m[1][3] + m1.m[0][2] * m2.m[2][3] + m1.m[0][3] * m2.m[3][3];
+	result.m[1][0] = m1.m[1][0] * m2.m[0][0] + m1.m[1][1] * m2.m[1][0] + m1.m[1][2] * m2.m[2][0] + m1.m[1][3] * m2.m[3][0];
+	result.m[1][1] = m1.m[1][0] * m2.m[0][1] + m1.m[1][1] * m2.m[1][1] + m1.m[1][2] * m2.m[2][1] + m1.m[1][3] * m2.m[3][1];
+	result.m[1][2] = m1.m[1][0] * m2.m[0][2] + m1.m[1][1] * m2.m[1][2] + m1.m[1][2] * m2.m[2][2] + m1.m[1][3] * m2.m[3][2];
+	result.m[1][3] = m1.m[1][0] * m2.m[0][3] + m1.m[1][1] * m2.m[1][3] + m1.m[1][2] * m2.m[2][3] + m1.m[1][3] * m2.m[3][3];
+	result.m[2][0] = m1.m[2][0] * m2.m[0][0] + m1.m[2][1] * m2.m[1][0] + m1.m[2][2] * m2.m[2][0] + m1.m[2][3] * m2.m[3][0];
+	result.m[2][1] = m1.m[2][0] * m2.m[0][1] + m1.m[2][1] * m2.m[1][1] + m1.m[2][2] * m2.m[2][1] + m1.m[2][3] * m2.m[3][1];
+	result.m[2][2] = m1.m[2][0] * m2.m[0][2] + m1.m[2][1] * m2.m[1][2] + m1.m[2][2] * m2.m[2][2] + m1.m[2][3] * m2.m[3][2];
+	result.m[2][3] = m1.m[2][0] * m2.m[0][3] + m1.m[2][1] * m2.m[1][3] + m1.m[2][2] * m2.m[2][3] + m1.m[2][3] * m2.m[3][3];
+	result.m[3][0] = m1.m[3][0] * m2.m[0][0] + m1.m[3][1] * m2.m[1][0] + m1.m[3][2] * m2.m[2][0] + m1.m[3][3] * m2.m[3][0];
+	result.m[3][1] = m1.m[3][0] * m2.m[0][1] + m1.m[3][1] * m2.m[1][1] + m1.m[3][2] * m2.m[2][1] + m1.m[3][3] * m2.m[3][1];
+	result.m[3][2] = m1.m[3][0] * m2.m[0][2] + m1.m[3][1] * m2.m[1][2] + m1.m[3][2] * m2.m[2][2] + m1.m[3][3] * m2.m[3][2];
+	result.m[3][3] = m1.m[3][0] * m2.m[0][3] + m1.m[3][1] * m2.m[1][3] + m1.m[3][2] * m2.m[2][3] + m1.m[3][3] * m2.m[3][3];
+
 	return result;
 }
-Vector3& operator*=(Vector3& v1, const Vector3& v2) {
-	v1.x *= v2.x;
-	v1.y *= v2.y;
-	v1.z *= v2.z;
-	return v1;
+
+Matrix4x4 MakeRotateZMatrix(float& rot) {
+	Matrix4x4 RotateMatZ = { 0 };
+	RotateMatZ = {
+		std::cos(rot), std::sin(rot), 0, 0, -std::sin(rot), std::cos(rot), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+	return RotateMatZ;
 }
 
-
-// 線形補間
-double easeInOutSine(double x) { return -(std::cos(M_PI * x) - 1) / 2; }
-
-// 加算
-Vector3 Add(const Vector3& v1, const Vector3& v2) { return Vector3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z); }
-// 減算
-Vector3 Subtract(const Vector3& v1, const Vector3& v2) { return { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z }; }
-
-// スカラー倍
-Vector3 Multiply(float scalar, const Vector3& v) { return { scalar * v.x, scalar * v.y, scalar * v.z }; }
-
-// 内積
-float Dot(const Vector3& v1, const Vector3& v2) { return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z; }
-
-// 長さの2乗
-float LengthSquared(const Vector3& v) { return v.x * v.x + v.y * v.y + v.z * v.z; }
-
-// 長さ
-float Length(const Vector3& v) { return static_cast<float>(sqrt(LengthSquared(v))); }
-
 Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
+
 	Vector3 result;
 	result.x = vector.x * matrix.m[0][0] + vector.y * matrix.m[1][0] + vector.z * matrix.m[2][0] + 1.0f * matrix.m[3][0];
 	result.y = vector.x * matrix.m[0][1] + vector.y * matrix.m[1][1] + vector.z * matrix.m[2][1] + 1.0f * matrix.m[3][1];
@@ -98,162 +101,32 @@ Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix) {
 	return result;
 }
 
-// 正規化
-Vector3 Normalize(const Vector3& v) {
-	float len = Length(v);
-	if (len != 0)
-		return { v.x / len, v.y / len, v.z / len };
-	else
-		return { 0.0f, 0.0f, 0.0f };
-}
 
-Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2) {
-	Matrix4x4 result{};
-	for (int row = 0; row < 4; ++row) {
-		for (int column = 0; column < 4; ++column) {
-			for (int i = 0; i < 4; ++i) {
-				result.m[row][column] += m1.m[row][i] * m2.m[i][column];
-			}
-		}
-	}
-	return result;
-}
-// 平行移動行列
-Matrix4x4 MakeTranslateMatrix(const Vector3& translate) {
-	Matrix4x4 translateMatrix;
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vector3& translate) {
 
-	translateMatrix.m[0][0] = 1;
-	translateMatrix.m[0][1] = 0;
-	translateMatrix.m[0][2] = 0;
-	translateMatrix.m[0][3] = 0;
-	translateMatrix.m[1][0] = 0;
-	translateMatrix.m[1][1] = 1;
-	translateMatrix.m[1][2] = 0;
-	translateMatrix.m[1][3] = 0;
-	translateMatrix.m[2][0] = 0;
-	translateMatrix.m[2][1] = 0;
-	translateMatrix.m[2][2] = 1;
-	translateMatrix.m[2][3] = 0;
-	translateMatrix.m[3][0] = translate.x;
-	translateMatrix.m[3][1] = translate.y;
-	translateMatrix.m[3][2] = translate.z;
-	translateMatrix.m[3][3] = 1;
-	return translateMatrix;
-}
-// 拡大縮小行列
-Matrix4x4 MakeScaleMatrix(const Vector3& scale) {
-	Matrix4x4 scaleMatrix;
-	scaleMatrix.m[0][0] = scale.x;
-	scaleMatrix.m[0][1] = 0.0f;
-	scaleMatrix.m[0][2] = 0.0f;
-	scaleMatrix.m[0][3] = 0.0f;
-	scaleMatrix.m[1][0] = 0.0f;
-	scaleMatrix.m[1][1] = scale.y;
-	scaleMatrix.m[1][2] = 0.0f;
-	scaleMatrix.m[1][3] = 0.0f;
-	scaleMatrix.m[2][0] = 0.0f;
-	scaleMatrix.m[2][1] = 0.0f;
-	scaleMatrix.m[2][2] = scale.z;
-	scaleMatrix.m[2][3] = 0.0f;
-	scaleMatrix.m[3][0] = 0.0f;
-	scaleMatrix.m[3][1] = 0.0f;
-	scaleMatrix.m[3][2] = 0.0f;
-	scaleMatrix.m[3][3] = 1.0f;
-	return scaleMatrix;
-}
-// x軸回転行列
-Matrix4x4 MakeRotateXMatrix(float radian) {
-	Matrix4x4 result;
-	float c = cos(radian);
-	float s = sin(radian);
+	Matrix4x4 ScallMat, RotateMat, RotateMatX, RotateMatY, RotateMatZ, TranslateMat, returnMat;
 
-	result.m[0][0] = 1.0f;
-	result.m[0][1] = 0.0f;
-	result.m[0][2] = 0.0f;
-	result.m[0][3] = 0.0f;
+	// スケール行列作成
+	ScallMat = { scale.x, 0, 0, 0, 0, scale.y, 0, 0, 0, 0, scale.z, 0, 0, 0, 0, 1 };
 
-	result.m[1][0] = 0.0f;
-	result.m[1][1] = c;
-	result.m[1][2] = s;
-	result.m[1][3] = 0.0f;
+	// XYZ回転行列作成
+	RotateMatX = { 1, 0, 0, 0, 0, cosf(rot.x), sinf(rot.x), 0, 0, -sinf(rot.x), cosf(rot.x), 0, 0, 0, 0, 1 };
 
-	result.m[2][0] = 0.0f;
-	result.m[2][1] = -s;
-	result.m[2][2] = c;
-	result.m[2][3] = 0.0f;
+	RotateMatY = { cosf(rot.y), 0, -sinf(rot.y), 0, 0, 1, 0, 0, sinf(rot.y), 0, cosf(rot.y), 0, 0, 0, 0, 1 };
 
-	result.m[3][0] = 0.0f;
-	result.m[3][1] = 0.0f;
-	result.m[3][2] = 0.0f;
-	result.m[3][3] = 1.0f;
+	RotateMatZ = { cosf(rot.z), sinf(rot.z), 0, 0, -sinf(rot.z), cosf(rot.z), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
 
-	return result;
-}
-// y軸回転行列
-Matrix4x4 MakeRotateYMatrix(float radian) {
-	Matrix4x4 result;
-	float c = cos(radian);
-	float s = sin(radian);
+	// XYZ回転行列の合成(Z*X*Y)
+	RotateMat = MatrixMultiply(RotateMatZ, RotateMatX);
+	// ↑の結果＊Y軸回転
+	RotateMat = MatrixMultiply(RotateMat, RotateMatY);
 
-	result.m[0][0] = c;
-	result.m[0][1] = 0.0f;
-	result.m[0][2] = -s;
-	result.m[0][3] = 0.0f;
+	// 平行移動行列作成
+	TranslateMat = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, translate.x, translate.y, translate.z, 1 };
 
-	result.m[1][0] = 0.0f;
-	result.m[1][1] = 1.0f;
-	result.m[1][2] = 0.0f;
-	result.m[1][3] = 0.0f;
+	// スケール＊回転＊平行移動をワールド変換行列に
+	returnMat = MatrixMultiply(ScallMat, RotateMat);
+	returnMat = MatrixMultiply(returnMat, TranslateMat);
 
-	result.m[2][0] = s;
-	result.m[2][1] = 0.0f;
-	result.m[2][2] = c;
-	result.m[2][3] = 0.0f;
-
-	result.m[3][0] = 0.0f;
-	result.m[3][1] = 0.0f;
-	result.m[3][2] = 0.0f;
-	result.m[3][3] = 1.0f;
-
-	return result;
-}
-// z軸回転行列
-Matrix4x4 MakeRotateZMatrix(float radian) {
-	Matrix4x4 result;
-	float c = cos(radian);
-	float s = sin(radian);
-
-	result.m[0][0] = c;
-	result.m[0][1] = s;
-	result.m[0][2] = 0.0f;
-	result.m[0][3] = 0.0f;
-
-	result.m[1][0] = -s;
-	result.m[1][1] = c;
-	result.m[1][2] = 0.0f;
-	result.m[1][3] = 0.0f;
-
-	result.m[2][0] = 0.0f;
-	result.m[2][1] = 0.0f;
-	result.m[2][2] = 1.0f;
-	result.m[2][3] = 0.0f;
-
-	result.m[3][0] = 0.0f;
-	result.m[3][1] = 0.0f;
-	result.m[3][2] = 0.0f;
-	result.m[3][3] = 1.0f;
-
-	return result;
-}
-// 3次元アフィン変換行列
-Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
-	Matrix4x4 scaleMatrix = MakeScaleMatrix(scale);
-	Matrix4x4 rotateXMatrix = MakeRotateXMatrix(rotate.x);
-	Matrix4x4 rotateYMatrix = MakeRotateYMatrix(rotate.y);
-	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(rotate.z);
-	Matrix4x4 rotateMatrix = Multiply(rotateXMatrix, Multiply(rotateYMatrix, rotateZMatrix));
-	Matrix4x4 translateMatrix = MakeTranslateMatrix(translate);
-	Matrix4x4 affineMatrix = Multiply(Multiply(scaleMatrix, rotateMatrix), translateMatrix);
-
-	return affineMatrix;
+	return returnMat;
 }

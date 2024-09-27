@@ -40,20 +40,20 @@ public:
 	public:
 		// ボイス処理パスの開始時
 		STDMETHOD_(void, OnVoiceProcessingPassStart)
-		([[maybe_unused]] THIS_ UINT32 BytesRequired){};
+			([[maybe_unused]] THIS_ UINT32 BytesRequired) {};
 		// ボイス処理パスの終了時
-		STDMETHOD_(void, OnVoiceProcessingPassEnd)(THIS){};
+		STDMETHOD_(void, OnVoiceProcessingPassEnd)(THIS) {};
 		// バッファストリームの再生が終了した時
-		STDMETHOD_(void, OnStreamEnd)(THIS){};
+		STDMETHOD_(void, OnStreamEnd)(THIS) {};
 		// バッファの使用開始時
-		STDMETHOD_(void, OnBufferStart)([[maybe_unused]] THIS_ void* pBufferContext){};
+		STDMETHOD_(void, OnBufferStart)([[maybe_unused]] THIS_ void* pBufferContext) {};
 		// バッファの末尾に達した時
 		STDMETHOD_(void, OnBufferEnd)(THIS_ void* pBufferContext);
 		// 再生がループ位置に達した時
-		STDMETHOD_(void, OnLoopEnd)([[maybe_unused]] THIS_ void* pBufferContext){};
+		STDMETHOD_(void, OnLoopEnd)([[maybe_unused]] THIS_ void* pBufferContext) {};
 		// ボイスの実行エラー時
 		STDMETHOD_(void, OnVoiceError)
-		([[maybe_unused]] THIS_ void* pBufferContext, [[maybe_unused]] HRESULT Error){};
+			([[maybe_unused]] THIS_ void* pBufferContext, [[maybe_unused]] HRESULT Error) {};
 	};
 
 	static Audio* GetInstance();

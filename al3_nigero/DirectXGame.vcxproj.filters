@@ -52,6 +52,18 @@
     <Filter Include="ヘッダー ファイル\audio">
       <UniqueIdentifier>{3a0044cc-1b7d-4ed5-a1a6-9074ed1b1769}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Resources">
+      <UniqueIdentifier>{505d2ec9-b4d3-4b64-9b12-b2753dd74492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Resources\axis">
+      <UniqueIdentifier>{5bf4156b-abcf-4e6d-b700-a5a3af568ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Resources\block">
+      <UniqueIdentifier>{17ee7927-a003-4015-95c3-33b2f227a2b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Resources\anko">
+      <UniqueIdentifier>{0289094a-eebe-4748-840d-d96398281c1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,7 +99,7 @@
     <ClCompile Include="MapChipField.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="mymath.cpp">
+    <ClCompile Include="myMath.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -96,10 +108,19 @@
     <ClCompile Include="Skydome.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
+    <ClCompile Include="Title.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="WorldTransformEx.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtility.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearParticle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -212,13 +233,25 @@
     <ClInclude Include="MapChipField.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="mymath.h">
+    <ClInclude Include="myMath.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Skydome.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtility.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearParticle.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

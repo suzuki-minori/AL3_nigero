@@ -1,6 +1,8 @@
 #include "TextureManager.h"
+#include "StringUtility.h"
 #include <DirectXTex.h>
 #include <cassert>
+#include <format>
 
 using namespace DirectX;
 
@@ -25,7 +27,7 @@ void TextureManager::Initialize(ID3D12Device* device, std::string directoryPath)
 
 	// デスクリプタサイズを取得
 	sDescriptorHandleIncrementSize_ =
-	    device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+		device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	// 全テクスチャリセット
 	ResetAll();
@@ -60,15 +62,15 @@ const D3D12_RESOURCE_DESC TextureManager::GetResoureDesc(uint32_t textureHandle)
 }
 
 void TextureManager::SetGraphicsRootDescriptorTable(
-    ID3D12GraphicsCommandList* commandList, UINT rootParamIndex,
-    uint32_t textureHandle) { // デスクリプタヒープの配列
+	ID3D12GraphicsCommandList* commandList, UINT rootParamIndex,
+	uint32_t textureHandle) { // デスクリプタヒープの配列
 	assert(textureHandle < textures_.size());
-	ID3D12DescriptorHeap* ppHeaps[] = {descriptorHeap_.Get()};
+	ID3D12DescriptorHeap* ppHeaps[] = { descriptorHeap_.Get() };
 	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
 	// シェーダリソースビューをセット
 	commandList->SetGraphicsRootDescriptorTable(
-	    rootParamIndex, textures_[textureHandle].gpuDescHandleSRV);
+		rootParamIndex, textures_[textureHandle].gpuDescHandleSRV);
 }
 
 uint32_t TextureManager::LoadInternal(const std::string& fileName) {
@@ -76,7 +78,7 @@ uint32_t TextureManager::LoadInternal(const std::string& fileName) {
 	// 読み込み済みテクスチャを検索
 	auto it = std::find_if(textures_.begin(), textures_.end(), [&](const auto& texture) {
 		return texture.name == fileName;
-	});
+		});
 	if (it != textures_.end()) {
 		// 読み込み済みテクスチャの要素番号を取得
 		return static_cast<uint32_t>(std::distance(textures_.begin(), it));
@@ -107,13 +109,22 @@ uint32_t TextureManager::LoadInternal(const std::string& fileName) {
 
 	// WICテクスチャのロード
 	result = LoadFromWICFile(wfilePath, WIC_FLAGS_NONE, &metadata, scratchImg);
-	assert(SUCCEEDED(result));
+	if (FAILED(result)) {
+		auto message = std::format(
+			L"テクスチャ「{0}」"
+			"の読み込みに失敗しました。\n指定したパスが正しいか、必須リソースのコピー"
+			"を忘れていないか確認してください。",
+			ConvertStringMultiByteToWide(fileName));
+		MessageBoxW(nullptr, message.c_str(), L"Not found texture", 0);
+		assert(false);
+		exit(1);
+	}
 
 	ScratchImage mipChain{};
 	// ミップマップ生成
 	result = GenerateMipMaps(
-	    scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(),
-	    TEX_FILTER_DEFAULT, 0, mipChain);
+		scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(),
+		TEX_FILTER_DEFAULT, 0, mipChain);
 	if (SUCCEEDED(result)) {
 		scratchImg = std::move(mipChain);
 		metadata = scratchImg.GetMetadata();
@@ -124,40 +135,40 @@ uint32_t TextureManager::LoadInternal(const std::string& fileName) {
 
 	// リソース設定
 	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
-	    metadata.format, metadata.width, (UINT)metadata.height, (UINT16)metadata.arraySize,
-	    (UINT16)metadata.mipLevels);
+		metadata.format, metadata.width, (UINT)metadata.height, (UINT16)metadata.arraySize,
+		(UINT16)metadata.mipLevels);
 
 	// ヒーププロパティ
 	CD3DX12_HEAP_PROPERTIES heapProps =
-	    CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
+		CD3DX12_HEAP_PROPERTIES(D3D12_CPU_PAGE_PROPERTY_WRITE_BACK, D3D12_MEMORY_POOL_L0);
 
 	// テクスチャ用バッファの生成
 	result = device_->CreateCommittedResource(
-	    &heapProps, D3D12_HEAP_FLAG_NONE, &texresDesc,
-	    D3D12_RESOURCE_STATE_GENERIC_READ, // テクスチャ用指定
-	    nullptr, IID_PPV_ARGS(&texture.resource));
+		&heapProps, D3D12_HEAP_FLAG_NONE, &texresDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ, // テクスチャ用指定
+		nullptr, IID_PPV_ARGS(&texture.resource));
 	assert(SUCCEEDED(result));
 
 	// テクスチャバッファにデータ転送
 	for (size_t i = 0; i < metadata.mipLevels; i++) {
 		const Image* img = scratchImg.GetImage(i, 0, 0); // 生データ抽出
 		result = texture.resource->WriteToSubresource(
-		    (UINT)i,
-		    nullptr,              // 全領域へコピー
-		    img->pixels,          // 元データアドレス
-		    (UINT)img->rowPitch,  // 1ラインサイズ
-		    (UINT)img->slicePitch // 1枚サイズ
+			(UINT)i,
+			nullptr,              // 全領域へコピー
+			img->pixels,          // 元データアドレス
+			(UINT)img->rowPitch,  // 1ラインサイズ
+			(UINT)img->slicePitch // 1枚サイズ
 		);
 		assert(SUCCEEDED(result));
 	}
 
 	// シェーダリソースビュー作成
 	texture.cpuDescHandleSRV = CD3DX12_CPU_DESCRIPTOR_HANDLE(
-	    descriptorHeap_->GetCPUDescriptorHandleForHeapStart(), handle,
-	    sDescriptorHandleIncrementSize_);
+		descriptorHeap_->GetCPUDescriptorHandleForHeapStart(), handle,
+		sDescriptorHandleIncrementSize_);
 	texture.gpuDescHandleSRV = CD3DX12_GPU_DESCRIPTOR_HANDLE(
-	    descriptorHeap_->GetGPUDescriptorHandleForHeapStart(), handle,
-	    sDescriptorHandleIncrementSize_);
+		descriptorHeap_->GetGPUDescriptorHandleForHeapStart(), handle,
+		sDescriptorHandleIncrementSize_);
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{}; // 設定構造体
 	D3D12_RESOURCE_DESC resDesc = texture.resource->GetDesc();
@@ -168,9 +179,9 @@ uint32_t TextureManager::LoadInternal(const std::string& fileName) {
 	srvDesc.Texture2D.MipLevels = (UINT)metadata.mipLevels;
 
 	device_->CreateShaderResourceView(
-	    texture.resource.Get(), //ビューと関連付けるバッファ
-	    &srvDesc,               //テクスチャ設定情報
-	    texture.cpuDescHandleSRV);
+		texture.resource.Get(), // ビューと関連付けるバッファ
+		&srvDesc,               // テクスチャ設定情報
+		texture.cpuDescHandleSRV);
 
 	useTable_.Set(handle);
 
@@ -215,14 +226,14 @@ void TextureManager::Bitset<kNumberOfBits>::Set(size_t bitIndex, bool value) {
 	uint64_t& word = GetWord(bitIndex);
 	if (value) {
 		word |= (uint64_t(1) << (bitIndex & kBitsPerWordMask));
-	} else {
+	}
+	else {
 		word &= ~(uint64_t(1) << (bitIndex & kBitsPerWordMask));
 	}
 }
 
 template<size_t kNumberOfBits> void TextureManager::Bitset<kNumberOfBits>::Reset() {
 	std::memset(words_, 0, sizeof(words_));
-	std::memset(words_, 0xff, sizeof(words_[0]) * 3);
 }
 
 template<size_t kNumberOfBits> void TextureManager::Bitset<kNumberOfBits>::Reset(size_t bitIndex) {

@@ -102,15 +102,15 @@ public: // メンバ関数
 
 private: // メンバ変数
 	// 方向（単位ベクトル）
-	Vector3 dir_ = {1, 0, 0};
+	Vector3 dir_ = { 1, 0, 0 };
 	// キャスターとライトの距離
 	float distanceCasterLight_ = 100.0f;
 	// キャスター座標（ワールド座標系）
-	Vector3 casterPos_ = {0, 0, 0};
+	Vector3 casterPos_ = { 0, 0, 0 };
 	// 距離減衰係数
-	Vector3 atten_ = {0.5f, 0.6f, 0.0f};
+	Vector3 atten_ = { 0.5f, 0.6f, 0.0f };
 	// 減衰角度
-	Vector2 factorAngleCos_ = {0.2f, 0.5f};
+	Vector2 factorAngleCos_ = { 0.2f, 0.5f };
 	// 有効フラグ
 	bool active_ = false;
 };

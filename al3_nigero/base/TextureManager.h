@@ -12,7 +12,7 @@
 class TextureManager {
 public:
 	// デスクリプターの数
-	static const size_t kNumDescriptors = 256;
+	static const size_t kNumDescriptors = 1024;
 
 	/// <summary>
 	/// テクスチャ
@@ -72,7 +72,7 @@ public:
 	/// <param name="rootParamIndex">ルートパラメータ番号</param>
 	/// <param name="textureHandle">テクスチャハンドル</param>
 	void SetGraphicsRootDescriptorTable(
-	    ID3D12GraphicsCommandList* commandList, UINT rootParamIndex, uint32_t textureHandle);
+		ID3D12GraphicsCommandList* commandList, UINT rootParamIndex, uint32_t textureHandle);
 
 private:
 	TextureManager() = default;
@@ -96,7 +96,7 @@ private:
 
 	private:
 		static constexpr size_t kCountOfWord =
-		    (kNumberOfBits == 0 ? 1 : ((kNumberOfBits - 1) / (8 * sizeof(uint64_t)) + 1));
+			(kNumberOfBits == 0 ? 1 : ((kNumberOfBits - 1) / (8 * sizeof(uint64_t)) + 1));
 		static constexpr size_t kBitsPerWord = 8 * sizeof(uint64_t);
 		static constexpr size_t kBitsPerWordMask = kBitsPerWord - 1;
 		static constexpr size_t kBitIndexToWordIndex = 6;

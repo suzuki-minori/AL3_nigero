@@ -104,8 +104,8 @@ public: // メンバ関数
 	/// <param name="rooParameterIndexMaterial">マテリアルのルートパラメータ番号</param>
 	/// <param name="rooParameterIndexTexture">テクスチャのルートパラメータ番号</param>
 	void Draw(
-	    ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
-	    UINT rooParameterIndexTexture);
+		ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
+		UINT rooParameterIndexTexture);
 
 	/// <summary>
 	/// 描画（テクスチャ差し替え版）
@@ -115,8 +115,8 @@ public: // メンバ関数
 	/// <param name="rooParameterIndexTexture">テクスチャのルートパラメータ番号</param>
 	/// <param name="textureHandle">差し替えるテクスチャハンドル</param>
 	void Draw(
-	    ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
-	    UINT rooParameterIndexTexture, uint32_t textureHandle);
+		ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
+		UINT rooParameterIndexTexture, uint32_t textureHandle);
 
 	/// <summary>
 	/// 頂点配列を取得

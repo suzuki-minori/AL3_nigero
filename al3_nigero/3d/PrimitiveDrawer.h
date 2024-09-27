@@ -119,7 +119,7 @@ private:
 	/// グラフィックパイプライン生成
 	/// </summary>
 	std::unique_ptr<PipelineSet>
-	    CreateGraphicsPipeline(D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType, BlendMode blendMode);
+		CreateGraphicsPipeline(D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType, BlendMode blendMode);
 
 	/// <summary>
 	/// グラフィックパイプライン生成
@@ -141,5 +141,5 @@ private:
 	BlendMode blendMode_ = BlendMode::kBlendModeNormal;
 	// パイプラインセット
 	std::array<std::unique_ptr<PipelineSet>, (uint16_t)BlendMode::kCountOfBlendMode>
-	    pipelineSetLines_;
+		pipelineSetLines_;
 };

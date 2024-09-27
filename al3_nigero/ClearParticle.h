@@ -1,42 +1,45 @@
-ï»¿#pragma once
+#pragma once
+#pragma once
 #include "Model.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
 #include "myMath.h"
+#include <algorithm>
 #include <array>
 #include <numbers>
-#include <algorithm>
-class DeathParticles {
+class ClearParticle {
+
 public:
-	// åˆæœŸåŒ–
+	// ‰Šú‰»
 	void Initialize(Model* model, ViewProjection* viewProjection, const Vector3& position);
-	// æ›´æ–°
+	// XV
 	void Update();
-	//æç”»
+	// •`‰æ
 	void Draw();
-	// ãƒ‡ã‚¹ã‚°ãƒ©ã‚°ã®getter
+	// ƒfƒXƒOƒ‰ƒO‚Ìgetter
 	bool IsFinished() const { return finished_; }
 
 private:
-	// ãƒ¢ãƒ‡ãƒ«
+	// ƒ‚ƒfƒ‹
 	Model* model_ = nullptr;
-	// ãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³
+	// ƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“
 	ViewProjection* viewProjection_ = nullptr;
-	//ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®å€‹æ•°
+	// ƒp[ƒeƒBƒNƒ‹‚ÌŒÂ”
 	static inline const uint32_t kNumParticles = 8;
 	std::array<WorldTransform, kNumParticles> worldTransforms_;
-	//å­˜ç¶šæ™‚é–“
+	// ‘¶‘±ŠÔ
 	static inline const float kDuration = 2.0f;
-	//ç§»å‹•ã®é€Ÿã•
+	// ˆÚ“®‚Ì‘¬‚³
 	static inline const float kSpeed = 0.05f;
-	//åˆ†å‰²ã—ãŸ1å€‹åˆ†ã®è§’åº¦
+	// •ªŠ„‚µ‚½1ŒÂ•ª‚ÌŠp“x
 	static inline const float kAngleUnit = (2 * std::numbers::pi_v<float> / kNumParticles);
-	// çµ‚äº†ãƒ•ãƒ©ã‚°
+	// I—¹ƒtƒ‰ƒO
 	bool finished_ = false;
-	// çµŒéæ™‚é–“ã‚«ã‚¦ãƒ³ãƒˆ
+	// Œo‰ßŠÔƒJƒEƒ“ƒg
 	float counter_ = 0.0f;
-	// è‰²å¤‰æ›´ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+	// F•ÏXƒIƒuƒWƒFƒNƒg
 	ObjectColor objectColor_;
-	// è‰²ã®å¤‰æ›´
+	// F‚Ì•ÏX
 	Vector4 color_;
+
 };

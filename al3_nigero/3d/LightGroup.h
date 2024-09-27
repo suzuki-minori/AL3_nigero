@@ -226,7 +226,7 @@ private: // メンバ変数
 	ConstBufferData* constMap_ = nullptr;
 
 	// 環境光の色
-	Vector3 ambientColor_ = {1, 1, 1};
+	Vector3 ambientColor_ = { 1, 1, 1 };
 
 	// 平行光源の配列
 	std::array<DirectionalLight, kDirLightNum> dirLights_;

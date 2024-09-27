@@ -1,11 +1,7 @@
-#include "TitleScene.h"
+#include "Title.h"
 #include <numbers>
 
-TitleScene::TitleScene() {}
-
-TitleScene::~TitleScene() { delete titlemodel_; }
-
-void TitleScene::Initialize() {
+void Title::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	titlemodel_ = Model::CreateFromOBJ("title", true);
 	titleWorldTransform_.Initialize();
@@ -13,7 +9,7 @@ void TitleScene::Initialize() {
 	Timer_ = 0.0f;
 }
 
-void TitleScene::Update() {
+void Title::Update() {
 	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
 		finished_ = true;
 	}
@@ -22,10 +18,10 @@ void TitleScene::Update() {
 	float radian = kWalkMotionAngleStart + kWalkMotionAngleEnd * (param + 1.0f) / 2.0f;
 	titleWorldTransform_.rotation_.y = radian * (std::numbers::pi_v<float> / 90.0f);
 	// 行列計算
-	titleWorldTransform_.UpdateMatrix();
+	titleWorldTransform_.UpdateMatirx();
 }
 
-void TitleScene::Draw() {
+void Title::Draw() {
 	ID3D12GraphicsCommandList* commandList = dxCommon_->GetCommandList();
 
 	Model::PreDraw(commandList);

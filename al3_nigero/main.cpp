@@ -5,52 +5,51 @@
 #include "ImGuiManager.h"
 #include "PrimitiveDrawer.h"
 #include "TextureManager.h"
+#include "Title.h"
 #include "WinApp.h"
-#include "TitleScene.h"
-
-//シーン(型)
+// シーン(型)
 enum class Scene {
 	kUnknown = 0,
 	kTitle,
 	kGame,
 };
 
-//現在シーン(型)
+// 現在シーン(型)
 Scene scene = Scene::kUnknown;
 
 GameScene* gameScene = nullptr;
-TitleScene* titleScene = nullptr;
+Title* titleScene = nullptr;
 
-//シーン切り替え
+// シーン切り替え
 void ChangeScene() {
 	switch (scene) {
 	case Scene::kTitle:
 		if (titleScene->IsFinished()) {
-			//シーン変更
+			// シーン変更
 			scene = Scene::kGame;
-			//旧シーンの解放
+			// 旧シーンの解放
 			delete titleScene;
 			titleScene = nullptr;
-			//新シーンの生成と初期化
+			// 新シーンの生成と初期化
 			gameScene = new GameScene;
 			gameScene->Initialize();
 		}
 		break;
 	case Scene::kGame:
 		if (gameScene->IsFinished()) {
-			//シーン変更
+			// シーン変更
 			scene = Scene::kTitle;
-			//旧シーンの解放
+			// 旧シーンの解放
 			delete gameScene;
 			gameScene = nullptr;
-			//新シーンの生成と初期化
-			titleScene = new TitleScene;
+			// 新シーンの生成と初期化
+			titleScene = new Title;
 			titleScene->Initialize();
 		}
 		break;
 	}
 }
-//シーンの更新
+// シーンの更新
 void UpdateScene() {
 	switch (scene) {
 	case Scene::kTitle:
@@ -61,7 +60,7 @@ void UpdateScene() {
 		break;
 	}
 }
-//シーンの描画
+// シーンの描画
 void DrawScene() {
 	switch (scene) {
 	case Scene::kTitle:
@@ -84,7 +83,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ゲームウィンドウの作成
 	win = WinApp::GetInstance();
-	win->CreateGameWindow(L"A");
+	win->CreateGameWindow(L"LE2C_26_ムトウ_アイリ_AL3");
 
 	// DirectX初期化処理
 	dxCommon = DirectXCommon::GetInstance();
@@ -121,10 +120,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	primitiveDrawer->Initialize();
 #pragma endregion
 
-	//最初のシーンの初期化
+	// 最初のシーンの初期化
 	scene = Scene::kTitle;
 	// ゲームシーンの初期化
-	titleScene = new TitleScene;
+	titleScene = new Title;
 	titleScene->Initialize();
 
 	// メインループ
@@ -138,9 +137,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imguiManager->Begin();
 		// 入力関連の毎フレーム処理
 		input->Update();
-		//シーンの切り替え
+		// シーンの切り替え
 		ChangeScene();
-		//現在シーン更新
+		// 現在シーン更新
 		UpdateScene();
 		// 軸表示の更新
 		axisIndicator->Update();
@@ -149,7 +148,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// 描画開始
 		dxCommon->PreDraw();
-		//現在シーンの描画
+		// 現在シーンの描画
 		DrawScene();
 		// 軸表示の描画
 		axisIndicator->Draw();

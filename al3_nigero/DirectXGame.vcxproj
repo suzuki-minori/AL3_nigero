@@ -112,15 +112,18 @@
     <ClCompile Include="base\TextureManager.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="ClearParticle.cpp" />
     <ClCompile Include="DeathParticles.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChipField.cpp" />
-    <ClCompile Include="mymath.cpp" />
+    <ClCompile Include="myMath.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="Skydome.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="StringUtility.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="WorldTransformEx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,19 +153,23 @@
     <ClInclude Include="base\TextureManager.h" />
     <ClInclude Include="base\WinApp.h" />
     <ClInclude Include="CameraController.h" />
+    <ClInclude Include="ClearParticle.h" />
     <ClInclude Include="DeathParticles.h" />
     <ClInclude Include="DebugText.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="MapChipField.h" />
     <ClInclude Include="math\Matrix4x4.h" />
     <ClInclude Include="math\Vector2.h" />
     <ClInclude Include="math\Vector3.h" />
     <ClInclude Include="math\Vector4.h" />
-    <ClInclude Include="mymath.h" />
+    <ClInclude Include="myMath.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="scene\GameScene.h" />
     <ClInclude Include="Skydome.h" />
-    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="StringUtility.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\TerrainPS.hlsl">
