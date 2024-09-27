@@ -54,9 +54,9 @@ public: // メンバ関数
 
 private: // メンバ変数
 	// ライト方向（単位ベクトル）
-	Vector3 lightDir_ = {1, 0, 0};
+	Vector3 lightDir_ = { 1, 0, 0 };
 	// ライト色
-	Vector3 lightColor_ = {1, 1, 1};
+	Vector3 lightColor_ = { 1, 1, 1 };
 	// 有効フラグ
 	bool active_ = false;
 };

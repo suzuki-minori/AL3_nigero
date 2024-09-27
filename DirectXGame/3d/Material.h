@@ -35,17 +35,17 @@ public:                            // メンバ変数
 	Vector3 ambient_;              // アンビエント影響度
 	Vector3 diffuse_;              // ディフューズ影響度
 	Vector3 specular_;             // スペキュラー影響度
-	Vector3 uvScale_ = {1, 1, 1};  // UVスケール
-	Vector3 uvOffset_ = {0, 0, 0}; // UVオフセット
+	Vector3 uvScale_ = { 1, 1, 1 };  // UVスケール
+	Vector3 uvOffset_ = { 0, 0, 0 }; // UVオフセット
 	float alpha_;                  // アルファ
 	std::string textureFilename_;  // テクスチャファイル名
 
 public:
 	// コンストラクタ
 	Material() {
-		ambient_ = {0.3f, 0.3f, 0.3f};
-		diffuse_ = {0.8f, 0.8f, 0.8f};
-		specular_ = {0.0f, 0.0f, 0.0f};
+		ambient_ = { 0.3f, 0.3f, 0.3f };
+		diffuse_ = { 0.8f, 0.8f, 0.8f };
+		specular_ = { 0.0f, 0.0f, 0.0f };
 		alpha_ = 1.0f;
 	}
 
@@ -72,8 +72,8 @@ public:
 	/// <param name="rooParameterIndexMaterial">マテリアルのルートパラメータ番号</param>
 	/// <param name="rooParameterIndexTexture">テクスチャのルートパラメータ番号</param>
 	void SetGraphicsCommand(
-	    ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
-	    UINT rooParameterIndexTexture);
+		ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
+		UINT rooParameterIndexTexture);
 
 	/// <summary>
 	/// グラフィックスコマンドのセット（テクスチャ差し替え版）
@@ -83,8 +83,8 @@ public:
 	/// <param name="rooParameterIndexTexture">テクスチャのルートパラメータ番号</param>
 	/// <param name="textureHandle">差し替えるテクスチャハンドル</param>
 	void SetGraphicsCommand(
-	    ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
-	    UINT rooParameterIndexTexture, uint32_t textureHandle);
+		ID3D12GraphicsCommandList* commandList, UINT rooParameterIndexMaterial,
+		UINT rooParameterIndexTexture, uint32_t textureHandle);
 
 	// テクスチャハンドル
 	uint32_t GetTextureHadle() const { return textureHandle_; }

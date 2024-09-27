@@ -52,15 +52,15 @@ public: // 静的メンバ関数
 	/// <param name="window_width">画面幅</param>
 	/// <param name="window_height">画面高さ</param>
 	static void StaticInitialize(
-	    ID3D12Device* device, int window_width, int window_height,
-	    const std::wstring& directoryPath = L"Resources/");
+		ID3D12Device* device, int window_width, int window_height,
+		const std::wstring& directoryPath = L"Resources/");
 
 	/// <summary>
 	/// 描画前処理
 	/// </summary>
 	/// <param name="cmdList">描画コマンドリスト</param>
 	static void
-	    PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode = BlendMode::kNormal);
+		PreDraw(ID3D12GraphicsCommandList* cmdList, BlendMode blendMode = BlendMode::kNormal);
 
 	/// <summary>
 	/// 描画後処理
@@ -78,8 +78,8 @@ public: // 静的メンバ関数
 	/// <param name="isFlipY">上下反転</param>
 	/// <returns>生成されたスプライト</returns>
 	static Sprite* Create(
-	    uint32_t textureHandle, Vector2 position, Vector4 color = {1, 1, 1, 1},
-	    Vector2 anchorpoint = {0.0f, 0.0f}, bool isFlipX = false, bool isFlipY = false);
+		uint32_t textureHandle, Vector2 position, Vector4 color = { 1, 1, 1, 1 },
+		Vector2 anchorpoint = { 0.0f, 0.0f }, bool isFlipX = false, bool isFlipY = false);
 
 private: // 静的メンバ変数
 	// 頂点数
@@ -94,8 +94,8 @@ private: // 静的メンバ変数
 	static Microsoft::WRL::ComPtr<ID3D12RootSignature> sRootSignature_;
 	// パイプラインステートオブジェクト
 	static std::array<
-	    Microsoft::WRL::ComPtr<ID3D12PipelineState>, size_t(BlendMode::kCountOfBlendMode)>
-	    sPipelineStates_;
+		Microsoft::WRL::ComPtr<ID3D12PipelineState>, size_t(BlendMode::kCountOfBlendMode)>
+		sPipelineStates_;
 	// 射影行列
 	static Matrix4x4 sMatProjection_;
 
@@ -108,8 +108,8 @@ public: // メンバ関数
 	/// コンストラクタ
 	/// </summary>
 	Sprite(
-	    uint32_t textureHandle, Vector2 position, Vector2 size, Vector4 color, Vector2 anchorpoint,
-	    bool isFlipX, bool isFlipY);
+		uint32_t textureHandle, Vector2 position, Vector2 size, Vector4 color, Vector2 anchorpoint,
+		bool isFlipX, bool isFlipY);
 
 	/// <summary>
 	/// 初期化
@@ -211,21 +211,21 @@ private: // メンバ変数
 	// 座標
 	Vector2 position_{};
 	// スプライト幅、高さ
-	Vector2 size_ = {100.0f, 100.0f};
+	Vector2 size_ = { 100.0f, 100.0f };
 	// アンカーポイント
-	Vector2 anchorPoint_ = {0, 0};
+	Vector2 anchorPoint_ = { 0, 0 };
 	// ワールド行列
 	Matrix4x4 matWorld_{};
 	// 色
-	Vector4 color_ = {1, 1, 1, 1};
+	Vector4 color_ = { 1, 1, 1, 1 };
 	// 左右反転
 	bool isFlipX_ = false;
 	// 上下反転
 	bool isFlipY_ = false;
 	// テクスチャ始点
-	Vector2 texBase_ = {0, 0};
+	Vector2 texBase_ = { 0, 0 };
 	// テクスチャ幅、高さ
-	Vector2 texSize_ = {100.0f, 100.0f};
+	Vector2 texSize_ = { 100.0f, 100.0f };
 	// リソース設定
 	D3D12_RESOURCE_DESC resourceDesc_;
 

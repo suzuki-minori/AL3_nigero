@@ -102,15 +102,15 @@ public: // メンバ関数
 
 private: // メンバ変数
 	// ライト方向（単位ベクトル）
-	Vector3 lightDir_ = {1, 0, 0};
+	Vector3 lightDir_ = { 1, 0, 0 };
 	// ライト座標（ワールド座標系）
-	Vector3 lightPos_ = {0, 0, 0};
+	Vector3 lightPos_ = { 0, 0, 0 };
 	// ライト色
-	Vector3 lightColor_ = {1, 1, 1};
+	Vector3 lightColor_ = { 1, 1, 1 };
 	// ライト距離減衰係数
-	Vector3 lightAtten_ = {1.0f, 1.0f, 1.0f};
+	Vector3 lightAtten_ = { 1.0f, 1.0f, 1.0f };
 	// ライト減衰角度
-	Vector2 lightFactorAngleCos_ = {0.2f, 0.5f};
+	Vector2 lightFactorAngleCos_ = { 0.2f, 0.5f };
 	// 有効フラグ
 	bool active_ = false;
 };

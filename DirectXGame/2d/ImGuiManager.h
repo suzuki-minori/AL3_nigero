@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #ifdef _DEBUG
 #include <d3d12.h>

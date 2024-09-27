@@ -38,10 +38,10 @@ public:
 	/// 初期化
 	/// </summary>
 	void Initialize(
-	    float modelWidth = kDefaultModelWidth, float modelDepth = kDefaultModelWidth,
-	    float modelHeight = kDefaultHeight,
-	    uint32_t vertexCountHorizontal = kDefaultVertexCountHorizontal,
-	    uint32_t vertexCountVertical = kDefaultVertexCountHorizontal);
+		float modelWidth = kDefaultModelWidth, float modelDepth = kDefaultModelWidth,
+		float modelHeight = kDefaultHeight,
+		uint32_t vertexCountHorizontal = kDefaultVertexCountHorizontal,
+		uint32_t vertexCountVertical = kDefaultVertexCountHorizontal);
 
 	/// <summary>
 	/// 描画
@@ -50,8 +50,8 @@ public:
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	/// <param name="textureHadle">テクスチャハンドル</param>
 	void Draw(
-	    const WorldTransform& worldTransform, const ViewProjection& viewProjection,
-	    uint32_t textureHadle);
+		const WorldTransform& worldTransform, const ViewProjection& viewProjection,
+		uint32_t textureHadle);
 
 	/// <summary>
 	/// 2Dパーリンノイズによる地形変動

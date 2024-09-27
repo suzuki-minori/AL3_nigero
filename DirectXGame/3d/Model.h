@@ -35,7 +35,7 @@ public:
 	/// <param name="worldTransform">ワールドトランスフォーム</param>
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	void TransformCommand(
-	    const WorldTransform& worldTransform, const ViewProjection& viewProjection);
+		const WorldTransform& worldTransform, const ViewProjection& viewProjection);
 
 	/// <summary>
 	/// 描画前処理
@@ -157,8 +157,8 @@ public: // メンバ関数
 	/// <param name="viewProjection">ビュープロジェクション</param>
 	/// <param name="objectColor">オブジェクトカラー</param>
 	void Draw(
-	    const WorldTransform& worldTransform, const ViewProjection& viewProjection,
-	    const ObjectColor* objectColor = nullptr);
+		const WorldTransform& worldTransform, const ViewProjection& viewProjection,
+		const ObjectColor* objectColor = nullptr);
 
 	/// <summary>
 	/// 描画（テクスチャ差し替え）
@@ -168,8 +168,8 @@ public: // メンバ関数
 	/// <param name="textureHadle">テクスチャハンドル</param>
 	/// <param name="objectColor">オブジェクトカラー</param>
 	void Draw(
-	    const WorldTransform& worldTransform, const ViewProjection& viewProjection,
-	    uint32_t textureHadle, const ObjectColor* objectColor = nullptr);
+		const WorldTransform& worldTransform, const ViewProjection& viewProjection,
+		uint32_t textureHadle, const ObjectColor* objectColor = nullptr);
 
 	/// <summary>
 	/// メッシュコンテナを取得
@@ -215,7 +215,7 @@ private: // メンバ関数
 	/// /// <param name="vertices">頂点配列</param>
 	/// <param name="indices">インデックス配列</param>
 	void InitializeFromVertices(
-	    const std::vector<Mesh::VertexPosNormalUv>& vertices, const std::vector<uint32_t>& indices);
+		const std::vector<Mesh::VertexPosNormalUv>& vertices, const std::vector<uint32_t>& indices);
 
 	/// <summary>
 	/// モデル読み込み
